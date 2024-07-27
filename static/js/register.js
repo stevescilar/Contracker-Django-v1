@@ -1,23 +1,44 @@
+/**
+ * Registration form validation script
+ *
+ * This script validates the username and email fields in real-time using API calls.
+ */
+
 // declaring the ID's from the registration form
 const usernameField = document.querySelector("#usernameField");
 const feedBackArea = document.querySelector(".invalid_feedback");
 const emailField = document.querySelector("#emailField");
-const passwordField = document.querySelector(".passwordField");
+const passwordField = document.querySelector("#passwordField");
 const emailFeedBackArea = document.querySelector(".emailFeedBackArea");
-const showPassword = document.querySelector(".showPassword");
+const showPasswordToggle = document.querySelector(".showPasswordToggle");
+const usernameSuccessOutput = document.querySelector(".usernameSuccessOutput")
+
+/**
+ * Toggles the password input field between show and hide
+ *
+ * @param {Event} e - The click event
+ */
 
 const handleToggleInput = (e) => {
-    if(showPassword.textContent === "SHOW") {
-        showPassword.textContent = "HIDE";
+    if(showPasswordToggle.textContent === 'SHOW') {
+
+        showPasswordToggle.textContent = 'HIDE';
+        passwordField.setAttribute("type", "text")
+
     }else {
-        showPassword.textContent = "SHOW";
+        showPasswordToggle.textContent = 'SHOW';
+        passwordField.setAttribute("type", "password")
+
     }
 };
 
-showPassword.addEventListener("click",handleToggleInput);
+showPasswordToggle.addEventListener("click", handleToggleInput);
 
-
-// event listener for email field
+/**
+ * Validates the email field in real-time using API call
+ *
+ * @param {Event} e - The keyup event
+ */
 emailField.addEventListener("keyup", (e) => {
     const emailVal = e.target.value;
     console.log("emailVal", emailVal); 
@@ -45,10 +66,11 @@ emailField.addEventListener("keyup", (e) => {
 }),
 
 
-
-
-
-// event listener for username
+/**
+ * Validates the username field in real-time using API call
+ *
+ * @param {Event} e - The keyup event
+ */
 usernameField.addEventListener("keyup", (e) => {
     const usernameVal = e.target.value;
     console.log("usernameVal", usernameVal); 
@@ -56,7 +78,7 @@ usernameField.addEventListener("keyup", (e) => {
     feedBackArea.style.display='none'
     
     if (usernameVal.length > 0) {
-            // fetch_api
+            // fetch API to validate username
         fetch("/authentication/validate-username",{
             body: JSON.stringify({username:usernameVal}),
             method: "POST",
@@ -64,7 +86,7 @@ usernameField.addEventListener("keyup", (e) => {
         .then((res) => res.json())
         .then((data) => {
             console.log("data",data);
-            // dd an error alert if username has error
+            // add an error alert if username has error
             if(data.username_error){
                 usernameField.classList.add("is-invalid");
                 feedBackArea.style.display='block'
