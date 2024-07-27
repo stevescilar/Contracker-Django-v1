@@ -4,7 +4,7 @@ from django.views import View
 from django.http import JsonResponse
 from django.contrib.auth.models import User
 from validate_email import validate_email
-
+from django.contrib import messages
 
 class EmailValidationView(View):
     def post(self, request):
@@ -32,3 +32,14 @@ class UsernameValidationView(View):
 class RegistrationView(View):
     def get(self, request):
         return render(request, 'authentication/registration.html')
+
+    def post(self, request):
+        # get user data
+        #validate
+        # create user account
+
+        username = request.POST['username']
+        email = request.POST['email']
+        password = request.POST['password']
+        return render(request, 'authentication/registration.html')
+

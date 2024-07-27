@@ -9,12 +9,17 @@
         <div class="card-title py-2">
           <h4>Create your account</h4>
         </div>
-        <form action="" method="post">
+
+        
+        <form action="{% url 'register' %}" method="post">
           {% csrf_token %}
+
+          {% include 'partials/_messages.html' %}
+
           <div class="form-group">
             <input
               type="text"
-              name="Username"
+              name="username"
               placeholder="username"
               id="usernameField"
               class="form-control form-control-sm"
@@ -46,7 +51,8 @@
           <input
             type="submit"
             value="Register"
-            class="btn btn-block btn-primary"
+            class="btn btn-block btn-primary submit-btn"
+
           />
         </form>
       </div>

@@ -12,7 +12,7 @@ const passwordField = document.querySelector("#passwordField");
 const emailFeedBackArea = document.querySelector(".emailFeedBackArea");
 const showPasswordToggle = document.querySelector(".showPasswordToggle");
 const usernameSuccessOutput = document.querySelector(".usernameSuccessOutput")
-
+const submitBtn = document.querySelector(".submit-btn");
 /**
  * Toggles the password input field between show and hide
  *
@@ -56,10 +56,13 @@ emailField.addEventListener("keyup", (e) => {
             console.log("data",data);
             // dd an error alert if email has error
             if(data.email_error){
+                submitBtn.disabled = true
                 emailField.classList.add("is-invalid");
                 emailFeedBackArea.style.display='block'
                 emailFeedBackArea.innerHTML=`<p>${data.email_error}</p>`
 
+            }else{
+                submitBtn.removeAttribute("disabled")
             }
         });
     }
@@ -85,13 +88,15 @@ usernameField.addEventListener("keyup", (e) => {
         })
         .then((res) => res.json())
         .then((data) => {
-            console.log("data",data);
             // add an error alert if username has error
             if(data.username_error){
                 usernameField.classList.add("is-invalid");
                 feedBackArea.style.display='block'
                 feedBackArea.innerHTML=`<p>${data.username_error}</p>`
+                submitBtn.disabled = true
 
+            }else{
+                submitBtn.removeAttribute("disabled")
             }
         });
     }
