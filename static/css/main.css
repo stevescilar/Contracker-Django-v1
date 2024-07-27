@@ -3,9 +3,47 @@
 }
 .form-group input {
   width: 100%;
-  padding: 10px;
+  padding: 5px;
   box-sizing: border-box;
 }
+
+.btn {
+    background-color: blue;
+    color: white;
+    padding: 10px 10px;
+    border: none;
+    cursor: pointer;
+}
+
+.showPasswordToggle {
+    cursor: pointer;
+    float: right;
+    /* padding-top: 5px; */
+    /* padding-left: 10px;
+    padding-right: 10px; */
+    transition: all;
+}
+.showPasswordToggle:hover {
+    transform: scale(1.2);
+}
+
+.password-container {
+  display: flex;
+  align-items: center;
+}
+
+#password {
+  padding:8px;
+  font-size: 16px;
+}
+
+#togglePassword {
+  margin-left: 8px;
+  padding: 8px 16px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
 
 .bd-placeholder-img {
         font-size: 1.125rem;
