@@ -12,7 +12,8 @@ const passwordField = document.querySelector("#passwordField");
 const emailFeedBackArea = document.querySelector(".emailFeedBackArea");
 const showPasswordToggle = document.querySelector(".showPasswordToggle");
 const usernameSuccessOutput = document.querySelector(".usernameSuccessOutput")
-const submitBtn = document.querySelector(".submit-btn");
+// const submitBtn = document.querySelector(".submit-btn");
+const submitBtn = document.getElementById('submit-btn');
 /**
  * Toggles the password input field between show and hide
  *
@@ -32,7 +33,7 @@ const handleToggleInput = (e) => {
     }
 };
 
-showPasswordToggle.addEventListener("click", handleToggleInput);
+showPasswordToggle.addEventListener("onclick", handleToggleInput);
 
 /**
  * Validates the email field in real-time using API call
@@ -57,8 +58,8 @@ emailField.addEventListener("keyup", (e) => {
             // dd an error alert if email has error
             if(data.email_error){
                 submitBtn.disabled = true
-                emailField.classList.add("is-invalid");
-                emailFeedBackArea.style.display='block'
+                // emailField.classList.add("is-invalid");
+                // emailFeedBackArea.style.display='block'
                 emailFeedBackArea.innerHTML=`<p>${data.email_error}</p>`
 
             }else{
