@@ -15,12 +15,16 @@
     cursor: pointer;
 }
 
-.show-password {
+.showPassword {
     cursor: pointer;
     float: right;
     padding-top: 5px;
     /* padding-left: 10px;
     padding-right: 10px; */
+    transition: all;
+}
+.showPassword:hover {
+    transform: scale(1.2);
 }
 .bd-placeholder-img {
         font-size: 1.125rem;

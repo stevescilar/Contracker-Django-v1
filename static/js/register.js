@@ -1,7 +1,20 @@
+// declaring the ID's from the registration form
 const usernameField = document.querySelector("#usernameField");
 const feedBackArea = document.querySelector(".invalid_feedback");
 const emailField = document.querySelector("#emailField");
+const passwordField = document.querySelector(".passwordField");
 const emailFeedBackArea = document.querySelector(".emailFeedBackArea");
+const showPassword = document.querySelector(".showPassword");
+
+const handleToggleInput = (e) => {
+    if(showPassword.textContent === "SHOW") {
+        showPassword.textContent = "HIDE";
+    }else {
+        showPassword.textContent = "SHOW";
+    }
+};
+
+showPassword.addEventListener("click",handleToggleInput);
 
 
 // event listener for email field
