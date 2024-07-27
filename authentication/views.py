@@ -41,5 +41,13 @@ class RegistrationView(View):
         username = request.POST['username']
         email = request.POST['email']
         password = request.POST['password']
+
+        if not User.objects.filter(username=username).exists():
+            if not User.objects.filter(email=email).exists():
+
+                if len(password)<8:
+                    messages.error(request, 'Password too short')
+                    return render(request, 'authentication/registration.html')
+
         return render(request, 'authentication/registration.html')
 
