@@ -138,9 +138,14 @@ MESSAGE_TAGS   = {
     messages.ERROR : 'danger'
 }
 
-EMAIL_HOST = os.environ.get('EMAIL_HOST')
-EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
-EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL')
-EMAIL_PORT = 587
+# EMAIL_HOST = os.environ.get('EMAIL_HOST')
+# EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+# EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+# EMAIL_USE_TLS = True
+# DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST_USER')
+# EMAIL_PORT = 587
+# EMAIL_PORT = '2525'
+EMAIL_HOST = 'sandbox.smtp.mailtrap.io'
+EMAIL_HOST_USER = '3a1ce589d48205'
+EMAIL_HOST_PASSWORD = '34f1eb9f9eabd1'
+EMAIL_PORT = '2525'
