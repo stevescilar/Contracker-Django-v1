@@ -1,5 +1,5 @@
 import json
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.views import View
 from django.http import JsonResponse
 from django.contrib.auth.models import User
@@ -72,4 +72,8 @@ class RegistrationView(View):
                 return render(request, 'authentication/registration.html')
 
         return render(request, 'authentication/registration.html')
+    
+class VerificationView(View):
+    def get(self, request, uidb64, token):
+        return redirect('login')
 
