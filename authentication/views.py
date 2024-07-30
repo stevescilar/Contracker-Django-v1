@@ -8,10 +8,19 @@ from django.contrib import messages
 from django.core.mail import EmailMessage
 from django.urls import reverse
 from django.contrib import auth
-from django.utils.encoding import force_bytes, force_text, DjangoUnicodeDecodeError
+from django.utils.encoding import force_bytes, force_str, DjangoUnicodeDecodeError
 from django.utils.http import urlsafe_base64_decode,urlsafe_base64_encode
 from django.contrib.sites.shortcuts import get_current_site
 from .utils import token_generator
+
+
+
+
+
+
+
+
+
 class EmailValidationView(View):
     def post(self, request):
         data = json.loads(request.body)
@@ -23,6 +32,8 @@ class EmailValidationView(View):
         if User.objects.filter(email=email).exists():
             return JsonResponse({'email_error': 'email taken, choose another one'}, status = 409) 
         return JsonResponse({'email_valid': True})
+    
+    # email validation okay
 class UsernameValidationView(View):
     def post(self, request):
         data = json.loads(request.body)
@@ -34,6 +45,8 @@ class UsernameValidationView(View):
         if User.objects.filter(username=username).exists():
             return JsonResponse({'username_error': 'username taken, choose another one'}, status = 409) 
         return JsonResponse({'username_valid': True})
+
+   
     
 class RegistrationView(View):
     def get(self, request):
@@ -64,18 +77,17 @@ class RegistrationView(View):
                 user.is_active = False
                 user.save()
 
-                uidb64 = force_bytes(urlsafe_base64_encode(user.pk))
-                # token = PasswordResetTokenGenerator().make_token(user)
+                uidb64 = urlsafe_base64_encode(force_bytes(user.pk))
                 domain = get_current_site(request).domain
-                link=reverse('activate',kwargs=(
-                    'uidb64':uidb64,'token':token_generator.make_toke(user)))
-                activate_url = 'http://'+domain+link
+                link=reverse('activate',kwargs={
+                    'uidb64':uidb64,'token':token_generator.make_token(user)})
+                activate_url = 'http://'+ domain + link
                 email_subject = 'Activate your account'
-                email_body ='Hi '+user.username + 'Please use this link to verify your account.\n' +activate_url 
+                email_body ='Hi '+user.username + ',\nPlease use this link to verify your account.\n' +activate_url 
                 email = EmailMessage(
                     email_subject,
                     email_body,
-                    'from@example.com',
+                    'admin@blackdust.com',
                     [email],
                 )
                 email.send(fail_silently=False)
